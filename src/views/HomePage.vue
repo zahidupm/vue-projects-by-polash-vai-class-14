@@ -1,5 +1,5 @@
 <template>
-  <button @click="addPost">Add Post</button>
+  <button class="top" @click="addPost">Add Post</button>
   <!-- favCount: {{ favCount }} <br />
   UnFavorite Count: {{ unFavCount }} -->
   <h1>All</h1>
@@ -100,5 +100,8 @@ export default {
 <style scoped>
 h1 {
   color: green;
+}
+.top {
+  margin-top: 20px;
 }
 </style>
