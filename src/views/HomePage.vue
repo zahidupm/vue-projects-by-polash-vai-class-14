@@ -1,10 +1,33 @@
 <template>
-  <h1 class="text-3xl text-red-400">{{ message }}</h1>
   <button @click="addPost">Add Post</button>
-  Name: {{ name }}
+  <!-- favCount: {{ favCount }} <br />
+  UnFavorite Count: {{ unFavCount }} -->
+  <h1>All</h1>
   <ul>
     <SinglePost
       v-for="post in posts"
+      :post="post"
+      :key="post.id"
+      @delete="handleDelete"
+      @fav="handleFav"
+    ></SinglePost>
+  </ul>
+  <br />
+  <h1>Favs</h1>
+  <ul>
+    <SinglePost
+      v-for="post in favs"
+      :post="post"
+      :key="post.id"
+      @delete="handleDelete"
+      @fav="handleFav"
+    ></SinglePost>
+  </ul>
+  <br />
+  <h1>UnFavs</h1>
+  <ul>
+    <SinglePost
+      v-for="post in unFavs"
       :post="post"
       :key="post.id"
       @delete="handleDelete"
@@ -21,8 +44,11 @@ export default {
   name: "HomePage",
   components: { Number, SinglePost },
   computed: {
-    name() {
-      return `${this.first} ${this.last}`;
+    favs() {
+      return this.posts.filter((post) => post.fav);
+    },
+    unFavs() {
+      return this.posts.filter((post) => !post.fav);
     },
   },
   data() {
