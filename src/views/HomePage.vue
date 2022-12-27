@@ -1,6 +1,7 @@
 <template>
   <h1 class="text-3xl text-red-400">{{ message }}</h1>
   <button @click="addPost">Add Post</button>
+  Name: {{ name }}
   <ul>
     <SinglePost
       v-for="post in posts"
@@ -19,26 +20,33 @@ import SinglePost from "../components/SinglePost.vue";
 export default {
   name: "HomePage",
   components: { Number, SinglePost },
+  computed: {
+    name() {
+      return `${this.first} ${this.last}`;
+    },
+  },
   data() {
     return {
       message: "Hello Bangladesh",
       posts: [
         {
           id: 1,
-          name: "Zahid",
+          name: "Jamuna",
           fav: true,
         },
         {
           id: 2,
-          name: "Hasan",
+          name: "Setu",
           fav: false,
         },
         {
           id: 3,
-          name: "Limon",
+          name: "1996",
           fav: true,
         },
       ],
+      first: "Zahid",
+      last: "Hasan",
     };
   },
   methods: {
@@ -48,7 +56,7 @@ export default {
     addPost() {
       this.posts.push({
         id: this.posts.length + 1,
-        name: `Limon ${this.posts.length + 1}`,
+        name: `Jamuna ${this.posts.length + 1}`,
       });
     },
     handleFav(post) {
