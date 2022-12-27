@@ -7,6 +7,7 @@
       :post="post"
       :key="post.id"
       @delete="handleDelete"
+      @fav="handleFav"
     ></SinglePost>
   </ul>
 </template>
@@ -25,22 +26,37 @@ export default {
         {
           id: 1,
           name: "Zahid",
+          fav: true,
         },
         {
           id: 2,
           name: "Hasan",
+          fav: false,
+        },
+        {
+          id: 3,
+          name: "Limon",
+          fav: true,
         },
       ],
     };
   },
   methods: {
-    handleDelete($post) {
-      this.posts = this.posts.filter((post) => post.id !== $post.id);
+    handleDelete(post) {
+      this.posts = this.posts.filter((p) => p.id !== post.id);
     },
     addPost() {
       this.posts.push({
         id: this.posts.length + 1,
         name: `Limon ${this.posts.length + 1}`,
+      });
+    },
+    handleFav(post) {
+      this.posts = this.posts.map((p) => {
+        if (p.id === post.id) {
+          p.fav = !p.fav;
+        }
+        return p;
       });
     },
   },

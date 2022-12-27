@@ -1,5 +1,11 @@
 <template>
-  <li>{{ post.name }} | <button @click="handleDelete">Delete Post</button></li>
+  <li>
+    <div style="display: inline-block" :class="{ fav: post.fav }">
+      {{ post.name }}
+    </div>
+    | <button @click="handleDelete(post)">Delete Post</button> |
+    <button @click="$emit('fav', post)">Fav Post</button>
+  </li>
 </template>
 
 <script>
@@ -18,4 +24,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.fav {
+  color: green;
+}
+</style>
